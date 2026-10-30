@@ -22,7 +22,7 @@ const connectDB = async () => {
   } catch (error) {
     console.error(`❌ MongoDB Connection Error: ${error.message}`);
     console.warn(
-      `⚠️ Warning: Unable to connect to MongoDB at ${mongoURI}. Ensure MongoDB is running locally on port 27017 or provide a valid MONGO_URI in server/.env`
+      '⚠️ Warning: Unable to connect to MongoDB. Check the MONGO_URI setting, Atlas network access list, database username, and password. The connection string is omitted from logs.'
     );
     throw error;
   }
