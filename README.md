@@ -138,7 +138,7 @@ Walleto is configured to host the React website on Vercel and the Express API on
 
    Redeploy the Vercel project after saving these values. If you later add a custom domain, add that exact origin to Render's `CLIENT_URLS` and redeploy the API.
 
-The Render Blueprint generates a production `JWT_SECRET`. Razorpay remains in test mode; to enable test checkout and QR payments, add `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` in the Render service's Environment settings. Never put secret values in Vercel variables or commit them to this repository. New production accounts start with a zero wallet balance, and demo accounts are not seeded.
+The Render Blueprint generates a production `JWT_SECRET`. Razorpay remains in test mode; to enable test checkout and QR payments, add `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` in the Render service's Environment settings. Password reset email delivery requires a Resend API key and a verified sender address in `RESEND_API_KEY` and `RESEND_FROM_EMAIL`. Never put secret values in Vercel variables or commit them to this repository. New production accounts start with a zero wallet balance, and demo accounts are not seeded.
 
 ## 🚀 Getting Started
 

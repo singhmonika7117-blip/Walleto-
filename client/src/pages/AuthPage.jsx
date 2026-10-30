@@ -3,12 +3,14 @@ import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import LoginForm from '../components/auth/LoginForm';
 import SignupForm from '../components/auth/SignupForm';
+import ForgotPasswordForm from '../components/auth/ForgotPasswordForm';
 import { Check, WalletCards } from 'lucide-react';
 import '../styles/auth.css';
 
 const AuthPage = () => {
   const { isAuthenticated } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
 
   if (isAuthenticated) return <Navigate to="/" replace />;
 
@@ -33,12 +35,14 @@ const AuthPage = () => {
 
       <section className="auth-panel" aria-labelledby="auth-title">
         <div className="auth-panel__heading">
-          <p className="auth-kicker">{isLogin ? 'YOUR WALLET, ORGANIZED' : 'GET STARTED'}</p>
-          <h2 id="auth-title">{isLogin ? 'Welcome back' : 'Create your account'}</h2>
-          <p>{isLogin ? 'Sign in to pick up where your group left off.' : 'Set up Walleto and start your first group.'}</p>
+          <p className="auth-kicker">{isForgotPassword ? 'ACCOUNT RECOVERY' : isLogin ? 'YOUR WALLET, ORGANIZED' : 'GET STARTED'}</p>
+          <h2 id="auth-title">{isForgotPassword ? 'Reset your password' : isLogin ? 'Welcome back' : 'Create your account'}</h2>
+          <p>{isForgotPassword ? 'We’ll email you a secure link to choose a new password.' : isLogin ? 'Sign in to pick up where your group left off.' : 'Set up Walleto and start your first group.'}</p>
         </div>
-        {isLogin
-          ? <LoginForm onToggleMode={() => setIsLogin(false)} />
+        {isForgotPassword
+          ? <ForgotPasswordForm onBack={() => setIsForgotPassword(false)} />
+          : isLogin
+          ? <LoginForm onToggleMode={() => setIsLogin(false)} onForgotPassword={() => setIsForgotPassword(true)} />
           : <SignupForm onToggleMode={() => setIsLogin(true)} />}
       </section>
     </div>

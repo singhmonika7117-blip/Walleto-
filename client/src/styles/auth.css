@@ -19,6 +19,11 @@
 .auth-panel .input-group { margin-bottom: .8rem; }
 .auth-panel .input-field { min-height: 45px; border-radius: 10px; }
 .auth-panel .btn-primary { min-height: 46px; border-radius: 10px; }
+.auth-layout--single { width: min(100%, 480px); grid-template-columns: 1fr; }
+.auth-message { padding: .8rem; border-radius: var(--radius-md); font-size: .875rem; line-height: 1.5; margin-bottom: .75rem; }
+.auth-message--error { background: rgba(239,68,68,.12); color: var(--danger); }
+.auth-message--success { background: rgba(34,197,94,.12); color: #55c98b; }
+.auth-back-link { display: inline-flex; justify-content: center; width: 100%; margin-top: 1rem; border: 0; background: transparent; color: var(--primary); font: inherit; font-size: .875rem; font-weight: 700; cursor: pointer; }
 
 @keyframes authRise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes brandFloat { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-4px) rotate(-4deg); } }

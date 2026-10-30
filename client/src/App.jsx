@@ -17,6 +17,7 @@ import GroupDetailPage from './pages/GroupDetailPage';
 import WalletPage from './pages/WalletPage';
 import ApprovalsPage from './pages/ApprovalsPage';
 import SettingsPage from './pages/SettingsPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 
 // Authenticated Layout Wrapper
 const AppLayout = () => {
@@ -29,6 +30,7 @@ const AppLayout = () => {
     return (
       <Routes>
         <Route path="/auth" element={<AuthPage />} />
+        <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
         <Route path="*" element={<Navigate to="/auth" replace />} />
       </Routes>
     );
@@ -45,6 +47,7 @@ const AppLayout = () => {
         <main key={location.pathname} className="page-wrapper">
           <Routes>
             <Route path="/" element={<DashboardPage />} />
+          <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
             <Route path="/groups/:id" element={<GroupDetailPage />} />
             <Route path="/wallet" element={<WalletPage />} />
             <Route path="/approvals" element={<ApprovalsPage />} />

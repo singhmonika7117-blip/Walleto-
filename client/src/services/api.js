@@ -30,7 +30,17 @@ api.interceptors.request.use(
 
 // Response interceptor: Handle 401s for expired session while preserving auth page errors
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    const isAuthRequest = /\/auth\/(login|register|forgot-password|reset-password)/.test(response.config?.url || '');
+    const contentType = response.headers?.['content-type'] || '';
+    if (isAuthRequest && !contentType.includes('application/json')) {
+      return Promise.reject(Object.assign(
+        new Error('Walleto’s API is not connected. The backend deployment or VITE_API_BASE_URL needs attention.'),
+        { code: 'ERR_API_UNAVAILABLE' }
+      ));
+    }
+    return response;
+  },
   (error) => {
     if (error.response && error.response.status === 401) {
       // Only redirect if NOT on the login/signup auth page

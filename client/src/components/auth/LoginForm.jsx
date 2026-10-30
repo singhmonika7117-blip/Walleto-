@@ -40,9 +40,13 @@ const LoginForm = ({ onToggleMode }) => {
     } catch (err) {
       setServerError(
         err.response?.data?.message ||
-        (err.message === 'Network Error'
-          ? 'Unable to connect to Walleto. Check your internet connection and try again.'
-          : 'Login failed. Please check your email and password.')
+        (err.code === 'ERR_API_UNAVAILABLE'
+          ? err.message
+          : err.code === 'ERR_NETWORK' || err.message === 'Network Error'
+            ? 'Walleto’s server could not be reached. Check your connection or try again later.'
+            : err.response
+              ? 'Login failed. Please try again.'
+              : err.message || 'Login failed. Please try again.')
       );
     } finally {
       setLoading(false);
@@ -80,6 +84,14 @@ const LoginForm = ({ onToggleMode }) => {
         icon={Lock}
         required
       />
+
+      <button
+        type="button"
+        onClick={onForgotPassword}
+        style={{ alignSelf: 'flex-end', marginTop: '-0.25rem', background: 'none', border: 'none', color: 'var(--primary)', fontWeight: 600, cursor: 'pointer', fontSize: '0.82rem' }}
+      >
+        Forgot password?
+      </button>
 
       <Button
         type="submit"

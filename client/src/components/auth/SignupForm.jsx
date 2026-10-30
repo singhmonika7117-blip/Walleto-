@@ -45,7 +45,14 @@ const SignupForm = ({ onToggleMode }) => {
       setLoading(true);
       await register(formData);
     } catch (err) {
-      setServerError(err.response?.data?.message || 'Registration failed. Try again.');
+      setServerError(
+        err.response?.data?.message ||
+        (err.code === 'ERR_API_UNAVAILABLE'
+          ? err.message
+          : err.code === 'ERR_NETWORK' || err.message === 'Network Error'
+            ? 'Walleto’s server could not be reached. Check your connection or try again later.'
+            : err.message || 'Registration failed. Try again.')
+      );
     } finally {
       setLoading(false);
     }
